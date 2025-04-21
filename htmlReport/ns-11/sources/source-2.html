@@ -1,0 +1,99 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > UserDao</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.ziss.notesappandroid.modules.user.data.data_sources.local.db</a>
+</div>
+
+<h1>Coverage Summary for Class: UserDao (com.ziss.notesappandroid.modules.user.data.data_sources.local.db)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">UserDao$MockitoMock$4op2Bcqi</td>
+  </tr>
+  <tr>
+    <td class="name">UserDao$MockitoMock$4op2Bcqi$auxiliary$kZQJs7oG</td>
+  </tr>
+  <tr>
+    <td class="name">UserDao$MockitoMock$4op2Bcqi$auxiliary$n4wbo2jk</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.ziss.notesappandroid.modules.user.data.data_sources.local.db
+&nbsp;
+&nbsp;import androidx.room.Dao
+&nbsp;import androidx.room.Insert
+&nbsp;import androidx.room.OnConflictStrategy
+&nbsp;import androidx.room.Query
+&nbsp;import com.ziss.notesappandroid.modules.user.data.data_sources.local.entities.UserEntity
+&nbsp;
+&nbsp;@Dao
+&nbsp;interface UserDao {
+&nbsp;    @Query(&quot;SELECT * FROM users&quot;)
+&nbsp;    suspend fun findAll(): List&lt;UserEntity&gt;
+&nbsp;
+&nbsp;    @Insert(onConflict = OnConflictStrategy.REPLACE)
+&nbsp;    suspend fun insertAll(users: List&lt;UserEntity&gt;)
+&nbsp;
+&nbsp;    @Query(&quot;SELECT * FROM users WHERE id = :id&quot;)
+&nbsp;    suspend fun findById(id: Int): UserEntity?
+&nbsp;
+&nbsp;    @Query(&quot;DELETE FROM users&quot;)
+&nbsp;    suspend fun clearAll()
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-16 11:02</div>
+</div>
+</body>
+</html>

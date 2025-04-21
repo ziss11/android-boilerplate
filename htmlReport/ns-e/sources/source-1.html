@@ -1,0 +1,303 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NoteRepository</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.ziss.notesappandroid.modules.note.data.repositories</a>
+</div>
+
+<h1>Coverage Summary for Class: NoteRepository (com.ziss.notesappandroid.modules.note.data.repositories)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NoteRepository</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">NoteRepository$createNote$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NoteRepository$deleteNote$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NoteRepository$fetchNotes$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NoteRepository$getNoteById$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NoteRepository$updateNote$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (36/36)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.ziss.notesappandroid.modules.note.data.repositories
+&nbsp;
+&nbsp;import arrow.core.Either.Left
+&nbsp;import arrow.core.Either.Right
+&nbsp;import com.ziss.notesappandroid.core.common.ApiException
+&nbsp;import com.ziss.notesappandroid.core.common.ServerFailure
+&nbsp;import com.ziss.notesappandroid.modules.note.data.data_sources.local.NoteLocalDataSource
+&nbsp;import com.ziss.notesappandroid.modules.note.data.data_sources.remote.NoteRemoteDataSource
+&nbsp;import com.ziss.notesappandroid.modules.note.data.models.NoteDto
+&nbsp;import kotlinx.coroutines.flow.flow
+&nbsp;
+<b class="fc">&nbsp;class NoteRepository(</b>
+<b class="fc">&nbsp;    private val remoteDataSource: NoteRemoteDataSource,</b>
+<b class="fc">&nbsp;    private val localDataSource: NoteLocalDataSource</b>
+&nbsp;) {
+<b class="fc">&nbsp;    fun createNote(note: NoteDto) = flow {</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            val result = remoteDataSource.create(note)</b>
+<b class="fc">&nbsp;            localDataSource.clearAll()</b>
+<b class="fc">&nbsp;            emit(Right(result))</b>
+&nbsp;        } catch (e: ApiException) {
+<b class="fc">&nbsp;            emit(Left(ServerFailure(e.error)))</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    fun deleteNote(id: Int) = flow {</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            val result = remoteDataSource.delete(id)</b>
+<b class="fc">&nbsp;            localDataSource.clearAll()</b>
+<b class="fc">&nbsp;            emit(Right(result))</b>
+&nbsp;        } catch (e: ApiException) {
+<b class="fc">&nbsp;            emit(Left(ServerFailure(e.error)))</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    fun fetchNotes(
+<b class="fc">&nbsp;        refresh: Boolean = false,</b>
+<b class="fc">&nbsp;        loadMore: Boolean = false,</b>
+<b class="fc">&nbsp;        page: Int? = 1,</b>
+<b class="fc">&nbsp;        limit: Int = 10,</b>
+<b class="fc">&nbsp;    ) = flow {</b>
+<b class="fc">&nbsp;        val localResult = localDataSource.findAll()</b>
+<b class="pc">&nbsp;        if (localResult.isNotEmpty() &amp;&amp; !refresh &amp;&amp; !loadMore) {</b>
+<b class="fc">&nbsp;            emit(Right(localResult))</b>
+&nbsp;        } else {
+&nbsp;            try {
+<b class="fc">&nbsp;                val remoteResult = remoteDataSource.fetch(page!!, limit)</b>
+<b class="fc">&nbsp;                if (refresh) {</b>
+<b class="fc">&nbsp;                    localDataSource.clearAll()</b>
+<b class="fc">&nbsp;                    localDataSource.insertAll(remoteResult.data!!)</b>
+&nbsp;                }
+<b class="fc">&nbsp;                emit(Right(remoteResult.data))</b>
+&nbsp;            } catch (e: ApiException) {
+<b class="fc">&nbsp;                emit(Left(ServerFailure(e.error)))</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    fun getNoteById(id: Int) = flow {</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            val result = remoteDataSource.getById(id)</b>
+<b class="fc">&nbsp;            emit(Right(result))</b>
+&nbsp;        } catch (e: ApiException) {
+<b class="fc">&nbsp;            emit(Left(ServerFailure(e.error)))</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    fun updateNote(id: Int, note: NoteDto) = flow {</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            val result = remoteDataSource.update(id, note)</b>
+<b class="fc">&nbsp;            localDataSource.clearAll()</b>
+<b class="fc">&nbsp;            emit(Right(result))</b>
+&nbsp;        } catch (e: ApiException) {
+<b class="fc">&nbsp;            emit(Left(ServerFailure(e.error)))</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-16 11:02</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > NoteService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.ziss.notesappandroid.modules.note.data.data_sources.remote.services</a>
+</div>
+
+<h1>Coverage Summary for Class: NoteService (com.ziss.notesappandroid.modules.note.data.data_sources.remote.services)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">NoteService$MockitoMock$L49u2lm4</td>
+  </tr>
+  <tr>
+    <td class="name">NoteService$MockitoMock$L49u2lm4$auxiliary$sJQKxJyg</td>
+  </tr>
+  <tr>
+    <td class="name">NoteService$MockitoMock$L49u2lm4$auxiliary$VytjHA6S</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.ziss.notesappandroid.modules.note.data.data_sources.remote.services
+&nbsp;
+&nbsp;import com.ziss.notesappandroid.modules.note.data.models.NoteDto
+&nbsp;import com.ziss.notesappandroid.modules.note.data.models.NoteModel
+&nbsp;import com.ziss.notesappandroid.shared.responses.BaseResponse
+&nbsp;import retrofit2.http.Body
+&nbsp;import retrofit2.http.DELETE
+&nbsp;import retrofit2.http.GET
+&nbsp;import retrofit2.http.PATCH
+&nbsp;import retrofit2.http.POST
+&nbsp;import retrofit2.http.Path
+&nbsp;import retrofit2.http.Query
+&nbsp;
+&nbsp;interface NoteService {
+&nbsp;    @POST(&quot;/notes&quot;)
+&nbsp;    suspend fun create(@Body note: NoteDto): BaseResponse&lt;NoteModel&gt;
+&nbsp;
+&nbsp;    @DELETE(&quot;/notes/{id}&quot;)
+&nbsp;    suspend fun delete(@Path(&quot;id&quot;) id: Int)
+&nbsp;
+&nbsp;    @GET(&quot;/notes&quot;)
+&nbsp;    suspend fun fetch(
+&nbsp;        @Query(&quot;page&quot;) page: Int,
+&nbsp;        @Query(&quot;limit&quot;) limit: Int
+&nbsp;    ): BaseResponse&lt;List&lt;NoteModel&gt;&gt;
+&nbsp;
+&nbsp;    @PATCH(&quot;/notes/{id}&quot;)
+&nbsp;    suspend fun update(@Path(&quot;id&quot;) id: Int, @Body note: NoteDto): BaseResponse&lt;NoteModel&gt;
+&nbsp;
+&nbsp;    @GET(&quot;/notes/{id}&quot;)
+&nbsp;    suspend fun getById(@Path(&quot;id&quot;) id: Int): BaseResponse&lt;NoteModel&gt;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-16 11:02</div>
+</div>
+</body>
+</html>
