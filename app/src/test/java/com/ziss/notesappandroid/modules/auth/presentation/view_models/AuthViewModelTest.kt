@@ -8,8 +8,6 @@ import com.ziss.notesappandroid.core.common.AuthFailure
 import com.ziss.notesappandroid.dummies.DummyObject.tAuthValidateModel
 import com.ziss.notesappandroid.modules.auth.data.repositories.AuthRepository
 import com.ziss.notesappandroid.shared.utils.ResultState
-import com.ziss.notesappandroid.utils.getOrAwaitValue
-import com.ziss.notesappandroid.utils.observeForTesting
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -42,15 +40,10 @@ class AuthViewModelTest {
     }
 
     @Test
-    fun `authCheck - state should loading when authCheck function called`() = runTest {
-        // Arrange
-        `when`(repository.validateAuth()).thenAnswer {
-            flowOf(Right(tAuthValidateModel))
-        }
-        // Act
-        val result = viewModel.authCheck().getOrAwaitValue()
+    fun `authCheck - state should initial`() = runTest {
         // Assert
-        assertTrue(result is ResultState.Loading)
+        val state = viewModel.authState.value
+        assertTrue(state is ResultState.Initial)
     }
 
     @Test
@@ -60,12 +53,11 @@ class AuthViewModelTest {
             flowOf(Right(tAuthValidateModel))
         }
         // Act
-        val result = viewModel.authCheck()
+        viewModel.authCheck()
         // Assert
-        result.observeForTesting {
-            assertTrue(result.value is ResultState.Success)
-            assertEquals((result.value as ResultState.Success).data, tAuthValidateModel)
-        }
+        val state = viewModel.authState.value
+        assertTrue(state is ResultState.Success)
+        assertEquals((state as ResultState.Success).data, tAuthValidateModel)
     }
 
     @Test
@@ -75,10 +67,9 @@ class AuthViewModelTest {
             flowOf(Left(AuthFailure()))
         }
         // Act
-        val result = viewModel.authCheck()
+        viewModel.authCheck()
         // Assert
-        result.observeForTesting {
-            assertTrue(result.value is ResultState.Failed)
-        }
+        val state = viewModel.authState.value
+        assertTrue(state is ResultState.Failed)
     }
 }
